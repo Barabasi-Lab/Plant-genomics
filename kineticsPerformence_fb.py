@@ -1,5 +1,6 @@
 ''' Reviewing the kinetics performance in different rankings windows then comparing to the same process for
-the unranked genome vs. experment'''
+the unranked genome vs. experment
+Written by Shany Ofaim, the Barabasi lab CCNR northeastern university 2021'''
 
 
 # imports
