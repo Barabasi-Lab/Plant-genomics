@@ -6,7 +6,9 @@ in each subset and overall. The piepline is:
 4. get the effective number of compounds
 5. calculate the overlap with the real original compound numbers
 6. repeat items 1-4 for the overlap
-7. plug the numbers into a hyhpergeometric test and get results'''
+7. plug the numbers into a hyhpergeometric test and get results
+ 
+ Written by Shany Ofaim, the Barabsi lab, CCNR Northeastern University 2021'''
 
 
 # imports
