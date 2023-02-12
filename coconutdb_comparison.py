@@ -94,11 +94,14 @@ def plot_3_way_venn(set1,set2,set3, label1, label2, label3, filename):
 def compile_result_table(coconutdb_fb_set, predicted_fb_set, experiments_fb_set, fb2smiles):
     """Compiles a results table for this analysis"""
     pooled_fb_set=coconutdb_fb_set|predicted_fb_set|experiments_fb_set
-
+    fb_wo_smiles=set()
     results_dict={}
     for fb in pooled_fb_set:
         results_dict[fb]={}
-        results_dict[fb]["smiles"]=fb2smiles[fb]
+        if fb in fb2smiles:
+            results_dict[fb]["smiles"]=fb2smiles[fb]
+        else:
+            fb_wo_smiles.add(fb)
         if fb in coconutdb_fb_set:
             results_dict[fb]["CoconutDB"]=1
         else:
