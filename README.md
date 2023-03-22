@@ -1,5 +1,5 @@
 
-![Logo](https://github.com/Barabasi-Lab/Plant-genomics/tree/main/images/NetSci_Logo.png)
+![Logo](https://github.com/Barabasi-Lab/Plant-genomics/blob/main/images/NetSci_Logo.png)
 
 
 
