@@ -14,3 +14,22 @@ To use the codein this repository please install the requirments in ```requirmen
 Use pip install -r requirements.txt to install the related packages.
 
 ## Code and Data
+
+### Code
+
+``` plant_analysis```
+
+    PathEnrichmentPerOrg_bonferroni.py :
+
+
+    Corn_ analysis.py :
+
+    
+
+``` thermodynamic_feasibility_analysis ```
+
+``` supporting_analysis ```
+
+
+### Data
+
