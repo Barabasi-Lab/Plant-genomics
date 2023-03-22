@@ -7,7 +7,7 @@
 
 ## Installation
 
-To use the codein this repository please install the requirments in requirments.txt
+To use the codein this repository please install the requirments in ```requirments.txt```
 
 
 
