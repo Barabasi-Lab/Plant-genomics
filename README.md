@@ -19,12 +19,17 @@ Use pip install -r requirements.txt to install the related packages.
 
 ``` plant_analysis```
 
-    PathEnrichmentPerOrg_bonferroni.py :
+**General plant analysis**
+
+PathEnrichmentPerOrg_bonferroni.py:
+
+**Corn specific analysis**
+
+corn_analysis.py:
 
 
-    Corn_ analysis.py :
+structure_analysisCorn.py:
 
-    
 
 ``` thermodynamic_feasibility_analysis ```
 
