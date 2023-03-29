@@ -34,13 +34,34 @@ corn_analysis.py:
 
 structure_analysisCorn.py:
 
+Calculates the similarity between corn related compounds and creates the clustermap presented in figure 5.
 
 ``` thermodynamic_feasibility_analysis ```
 
+feasibleReactionsPerOrg.py:
+
+
+kineticsPerformance_fb.py:
+
+
 ``` supporting_analysis ```
 
+coconutdb_comparison.py:
+
+kegg_lipid_content.py:
+
+pca_approch.ipynb:
+
+plant_family.py:
 
 ### Data
 
 All the data files are ocated in the data folder.
 
+Metabolomics data (Metabolon_Data.xlsx) - Contains the metabolomics experiments results for the plants presented in the paper.
+
+Metabolic annotations master table  (plant_masterTable_100621_ds1.csv) - Contains all the annotations collected for the plants presented in the paper.
+
+Table_s2- A comparison of first block InchIKeys from coconutDB, our predicted to accumulate compounds, and experimentally detected compounds.
+
+Thermodynamic feasibility score table (kinetics_all_plants_df_fb_avg.csv) - Atable summarizing the thermodynamic feasibility approach results including the score, is it found in the experiments, first block inchi key, the group of full inchi keys for that first block representation, compound mass and the number of reactions the compound is in.

@@ -1,6 +1,6 @@
 '''Profiling the coverage of KEGG pathways- how many compounds are in each pathway.
 Doing a hypergeometric test to test for enrichment (biases for certain pathways.
-That would be the baseline. Step 2 - collecting KEGG annotations from MDM and seeing that I have more than what
+That would be the baseline. Step 2 - collecting KEGG annotations and seeing that I have more than what
 was found in KEGG.
 Recounting pathway coverages - how many compounds per pathway.
 Redoing hypergeometric test to test for a shift
@@ -28,12 +28,14 @@ from sklearn.decomposition import PCA
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from statsmodels.sandbox.stats.multicomp import multipletests
+
 # ----- functions ---------
 def cleanhtml(raw_html):
     # html tag cleaner copied from stack overflow, cleans non tag entities as well
   cleanr = re.compile('<.*?>|&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});')
   cleantext = re.sub(cleanr, '', raw_html)
   return cleantext
+
 def plotlyPCA(df):
     fig = px.scatter(df, x=df['PC1'], y=df['PC2'], color=df['cat'])
     fig.show()
@@ -90,13 +92,15 @@ def plotPCA(dframe,fname):
     plotlyPCA(pc_df_scaled)
     #plotlyPCA3d(pc_df_scaled)
 
-def getPathways():
-    pass
+
 def cleanhtml(raw_html):
     # html tag cleaner copied from stack overflow, cleans non tag entities as well
   cleanr = re.compile('<.*?>|&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});')
   cleantext = re.sub(cleanr, '', raw_html)
   return cleantext
+
+
+
 # ----------- main -----------
 kegg_con=KEGG()
 # read the pathway and reaction mapping for all organisms

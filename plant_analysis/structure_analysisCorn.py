@@ -68,6 +68,7 @@ def cleanhtml(raw_html):
   cleanr = re.compile('<.*?>|&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});')
   cleantext = re.sub(cleanr, '', raw_html)
   return cleantext
+
 def getName(inchikey):
     ''' Gets the name and isomeric smiles string from pubchem'''
     while True:
@@ -133,6 +134,7 @@ def getSmiles(inchikey):
             print('Retrying in 0.5 seconds. Exception in connecting')
             time.sleep(0.5)
     return smiles
+
 def addMolecule(dataframe):
     ''' Adds a rdkit molecule represntation to a datframe'''
     PandasTools.AddMoleculeColumnToFrame(dataframe, 'smiles', 'Molecule', includeFingerprints=True)
@@ -187,11 +189,6 @@ orgs=pickle.load(open('orgs_classified_orgkeys.pkl','rb'))
 
 # I need the smiles - I can find them in ndm and mdm
 # read mdm
-print('loading MDM')
-'''mdm={}
-with open('MDM_021721.json') as mdmin:
-    mdm=json.load(mdmin)
-'''
 ndmdf=pd.read_csv('NDM_MasterJan21.csv')
 ndm=ndmdf.set_index('InChIKey').to_dict()
 mdm=pickle.load(open('mdm_040621.pkl','rb'))
@@ -248,13 +245,6 @@ counterST=collections.Counter(df['type'])
 counterSTkey=sorted(counterST, key=counterST.get, reverse=True)
 counttypes=[counterST[k] for k in counterSTkey]
 print([(k, counterST[k]) for k in counterSTkey])
-
-
-'''plt.figure(figsize = (20, 20))
-p=umap.plot.points(map)
-plt.tight_layout()
-plt.show()'''
-
 
 
 plt.figure(figsize = (10, 10))
