@@ -23,6 +23,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib_venn import venn2, venn3
 import re
+import os
 
 
 # ------ functions ----------
@@ -291,18 +292,24 @@ def prodScore(fblock, inchi_k, kr_list, pr_list, org):
 # ----------- main ---------
 
 visited={}
-keggCache={}
+
+# check if a cach file for kegg exists
+if os.path.exists("./util_files/keggcache.pkl"):
+    keggCache=pickle.load(open("./util_files/keggcache.pkl", "rb"))
+else:
+    keggCache={}
+
 k = KEGG()
 global ikscores
 ikscores = {}
 # load MDM
 print('loading MDM')
 mdm = {}
-with open('MDM_021721.json') as mdmin:
+with open('./util_files/MDM_021721.json') as mdmin:
     mdm = json.load(mdmin)
 
 # load the masses for the inchi key
-ik2mass=pickle.load(open('ik2fbNmass.pkl', 'rb'))
+ik2mass=pickle.load(open('./util_files/ik2fbNmass.pkl', 'rb'))
 
 
 # create a mdm2kegg and mdm2metacyc convertion dictionary to validate inchi keys
@@ -325,14 +332,14 @@ for mik in mdm:
 print('loaded MDM')
 print('loading seed reactions')
 seedReac = {}
-with open('reactions.json') as rin:
+with open('./util_files/reactions.json') as rin:
     seedReac = json.load(rin)
 
 # change the seed dictionary to something more easy to work with
 global sr
 sr = {}
 ccount={}
-rout=open('reaction_to_check.txt','w')
+rout=open('./results/reaction_to_check.txt','w')
 for n, reac in enumerate(seedReac):
     # test: check if a reaction alias appears in more than one reaction
     if 'aliases' in reac and reac['aliases']:
@@ -382,7 +389,7 @@ metacyc2cpd = {}
 global ik2name
 ik2name = {}
 cofactors = set()
-with open('compounds.json') as sin:
+with open('./util_files/compounds.json') as sin:
     seedcomp = json.load(sin)
 
 # turning seed compounds to a managable file
@@ -425,7 +432,7 @@ seediks = list(seediks)
 print('loading PMN reaction data')
 global pmnReac
 pmnReac = {}
-with open('PMNReacs.json') as pin:
+with open('./util_files/PMNReacs.json') as pin:
     pmnReac = json.load(pin)
 
 # step 1 - get all the reactions for an organism- in this case apple
@@ -439,8 +446,8 @@ dgreac = set()
 badkegg = 0
 badpmn = 0
 dgs = []
-fout = open('bad_reac.txt', 'w')
-pout = open('deltag.txt', 'w')
+fout = open('./results/bad_reac.txt', 'w')
+pout = open('./results/deltag.txt', 'w')
 appleiks=set()
 global org2syn
 org2syn={}
@@ -608,12 +615,15 @@ for ik in tqdm(mdm):
                 continue
             else:
                 prodScore(fb, ik, krlist, prlist,org)
+
+# save cache to file
+pickle.dump( keggCache, open( "./util_files/keggcache.pkl", "wb" ) )
 # save orgreacs to file
 
 pickle.dump( orgreacs, open( "orgReacKinetics.pkl", "wb" ) )
 # save scores to file
 # change organism names to lower for scores.
-for org in scores:
+for org in list(scores):
     norg=org.lower()
     scores[norg]=scores.pop(org)
 pickle.dump( scores, open( "kineticScores.pkl", "wb" ) )
@@ -761,4 +771,4 @@ tout.close()'''
 
 with open('reac2dg.json','w') as nin:
     nin.write(json.dumps(reac2dg))
-sys.exit()
+#sys.exit()

@@ -25,10 +25,14 @@ Use pip install -r requirements.txt to install the related packages.
 
 PathEnrichmentPerOrg_bonferroni.py:
 
+Contains the code for the pathway enrichment analysis and bonferonni correction or all plant.
+
+
 **Corn specific analysis**
 
 corn_analysis.py:
 
+Contains all the analysis components and figures related to corn related compounds except for figure 5.
 
 structure_analysisCorn.py:
 
@@ -38,19 +42,28 @@ Calculates the similarity between corn related compounds and creates the cluster
 
 feasibleReactionsPerOrg.py:
 
+collects and computes the reactions with Gibbs free values and performes the scoring according to the Thermodynamic feasibility analysis described in the paper.
+
 
 kineticsPerformance_fb.py:
+
+Calculates the performance metrics for the thermodynamic feasibility approach and creates some of the components for figure 6.
 
 
 ``` supporting_analysis ```
 
 coconutdb_comparison.py:
 
+Calculates and plots the comparison between coconutDB and the other databases presented in this work.
+
 kegg_lipid_content.py:
+Counts the number of lipids in the keeg database using the information found in the KEGG compound website.
 
 pca_approch.ipynb:
+Calculates the comparision and the significance of overlap between the diffeent data sources presented in this work.
 
 plant_family.py:
+Creates the phylogenetic tree for the plants included in this analysis.
 
 ### Data
 
@@ -63,3 +76,8 @@ Metabolic annotations master table  (plant_masterTable_100621_ds1.csv) - Contain
 Table_s2- A comparison of first block InchIKeys from coconutDB, our predicted to accumulate compounds, and experimentally detected compounds.
 
 Thermodynamic feasibility score table (kinetics_all_plants_df_fb_avg.csv) - Atable summarizing the thermodynamic feasibility approach results including the score, is it found in the experiments, first block inchi key, the group of full inchi keys for that first block representation, compound mass and the number of reactions the compound is in.
+
+Other files used for running the analysis that can used as a demo are in the util_files folder.
+
+
+For any questions or inquiries please contact the Barabasi lab in https://www.barabasilab.com/

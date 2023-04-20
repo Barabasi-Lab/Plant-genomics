@@ -54,7 +54,7 @@ for org in orgdgscores:
     norg=org.lower()
     orgdgscores[norg]=orgdgscores.pop(org)
 # load the file with all the keys from different sources including experimental - full keys
-orgkeys=pickle.load(open('orgkeys_new.pkl','rb'))
+orgkeys=pickle.load(open('./util_files/orgkeys_new.pkl','rb'))
 
 # get the list of plants that have experimental evidence
 plantList=set()
