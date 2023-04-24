@@ -75,9 +75,11 @@ Metabolic annotations master table  (plant_masterTable_100621_ds1.csv) - Contain
 
 Table_s2- A comparison of first block InchIKeys from coconutDB, our predicted to accumulate compounds, and experimentally detected compounds.
 
-Thermodynamic feasibility score table (kinetics_all_plants_df_fb_avg.csv) - Atable summarizing the thermodynamic feasibility approach results including the score, is it found in the experiments, first block inchi key, the group of full inchi keys for that first block representation, compound mass and the number of reactions the compound is in.
+Thermodynamic feasibility score table (kinetics_all_plants_df_fb_avg.csv) - A table summarizing the thermodynamic feasibility approach results including the score, is it found in the experiments, first block inchIKey, the group of full inchIKeys for that first block representation, compound mass and the number of reactions the compound is in.
 
 Other files used for running the analysis that can used as a demo are in the util_files folder.
+
+All data files are available in : https://zenodo.org/record/7860346#.ZEbk43bMK3C
 
 
 For any questions or inquiries please contact the Barabasi lab in https://www.barabasilab.com/
