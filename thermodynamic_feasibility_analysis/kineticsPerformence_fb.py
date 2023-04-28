@@ -4,6 +4,13 @@ Written by Shany Ofaim, the Barabasi lab CCNR northeastern university 2021'''
 
 
 # imports
+
+import sys
+
+if not sys.warnoptions:
+    import warnings
+    warnings.simplefilter("ignore")
+
 import pickle
 from tqdm import tqdm
 import seaborn as sns
@@ -23,7 +30,7 @@ from sklearn.preprocessing import label_binarize
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import average_precision_score
-from sklearn.metrics import plot_precision_recall_curve
+from sklearn.metrics import precision_recall_curve
 from numpy import sqrt
 from numpy import argmax
 from sklearn.metrics import f1_score
@@ -49,8 +56,8 @@ fb2ik={}
 ''' This analysis will be performed for each genome of the 13 that we have experiments for '''
 ''' edit 06/14/21 - add the complete genome without kinetic scores and calculate the perfomrance of guessing the experiments'''
 # load the file with the kinetics scores - contains both positives and negatives
-orgdgscores=pickle.load(open('kineticScores.pkl','rb'))
-for org in orgdgscores:
+orgdgscores=pickle.load(open('./util_files/kineticScores.pkl','rb'))
+for org in list(orgdgscores):
     norg=org.lower()
     orgdgscores[norg]=orgdgscores.pop(org)
 # load the file with all the keys from different sources including experimental - full keys
@@ -62,7 +69,7 @@ org2total={}
 mtdf=pd.DataFrame()
 # get all known fbs
 totfbs=set()
-with open('all_fb.txt') as fin:
+with open('./util_files/all_fb.txt') as fin:
     for line in fin:
         line=line.strip()
         totfbs.add(line)
@@ -170,7 +177,7 @@ gendf=pd.DataFrame()
                 gendf = gendf.append(row_to_add)
 
 gendf.to_csv('kinetics_all_Plants_df_fb.csv')'''
-gendf=pd.read_csv('kinetics_all_Plants_df_fb.csv')
+gendf=pd.read_csv('./util_files/kinetics_all_Plants_df_fb.csv')
 # plot the scores vs. number of reactions
 '''fig, ax = plt.subplots()
 ax2 = ax.twinx()
@@ -258,7 +265,7 @@ for plant in tqdm(sorted(plantList)):
         metdf = metdf.append(row_to_add)
 
 # scatter x vs auc and x vs average precision anf f1
-metdf.to_csv('performance_results_fb.csv')
+metdf.to_csv('./results/performance_results_fb.csv')
 sns.set(font_scale=2)
 sns.color_palette("pastel")
 plt.figure(figsize=(10, 10))
@@ -278,7 +285,7 @@ plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left',
 plt.ylim(0,1)
 plt.axhline(y=0.5, color='black', linestyle='--')
 plt.tight_layout()
-plt.savefig("pr_auc.svg")
+plt.savefig("./results/pr_auc.svg")
 plt.show()
 
 plt.figure(figsize=(10, 10))
@@ -286,7 +293,7 @@ sns.scatterplot(x='df_fraction',y='average_precision', data=metdf, hue='plant',p
 plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left',
            ncol=2, mode="expand", borderaxespad=0., fontsize='medium')
 plt.tight_layout()
-plt.savefig("avg_precision.svg")
+plt.savefig("./results/avg_precision.svg")
 plt.show()
 
 plt.figure(figsize=(10, 10))
@@ -294,7 +301,7 @@ sns.scatterplot(x='df_fraction',y='f1', data=metdf, hue='plant',palette=sns.colo
 plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left',
            ncol=2, mode="expand", borderaxespad=0., fontsize='medium')
 plt.tight_layout()
-plt.savefig("f1.svg")
+plt.savefig("./results/f1.svg")
 plt.show()
 
 plt.figure(figsize=(10, 10))
@@ -302,7 +309,7 @@ sns.scatterplot(x='df_fraction',y='best_threshold', data=metdf, hue='plant',pale
 plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left',
            ncol=2, mode="expand", borderaxespad=0., fontsize='medium')
 plt.tight_layout()
-plt.savefig("best_th.svg")
+plt.savefig("./results/best_th.svg")
 plt.show()
 
 
@@ -321,7 +328,7 @@ for org in tqdm(orgkeys):
     if 'pyrus communis' in org:
         continue
     # create the dataframe for performance calculations
-    if org in orgdgscores:
+    if org in tqdm(orgdgscores):
 
         expset=set()
         predset=set()
@@ -370,7 +377,7 @@ for plant in tqdm(sorted(plantList)):
     plantdf = optdf[optdf['plant'] == plant]
     plantdf = plantdf.sort_values(by=['sum'], ascending=False)
     plantdf = plantdf.head(n=tdict[plant]['fraction'])
-    fname=plant+'_top fraction_avg.csv'
+    fname='./results/'+plant+'_top fraction_avg.csv'
     plantdf.to_csv(fname)
 
     # turn the dataframe to a dictionary to get the set of full inchi keys per optimal fraction
@@ -428,9 +435,9 @@ plt.ylabel('True positive rate')
 
 plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left',
            ncol=3, mode="expand", borderaxespad=0., fontsize=28)
-plt.savefig('opt_ROCs.svg')
+plt.savefig('./results/opt_ROCs.svg')
 plt.show()
 
-pickle.dump( optorg2keys, open( "optimal_orgs.pkl", "wb" ) )
+pickle.dump( optorg2keys, open( "./results/optimal_orgs.pkl", "wb" ) )
 
 print('Done')
