@@ -317,7 +317,7 @@ plt.show()
 # optimal fractions
 # second pass classification
 
-othresholds=pd.read_csv('optimal_thresholds_fb.csv')
+othresholds=pd.read_csv('./util_files/optimal_thresholds_fb.csv')
 
 tdict=othresholds.set_index('plant').to_dict('index')
 
